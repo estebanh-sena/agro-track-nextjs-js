@@ -7,6 +7,8 @@ import {
   faSatelliteDish,
   faBuildingWheat,
   faBars,
+  faPuzzlePiece,
+  faMoneyBillWheat,
 } from "@fortawesome/free-solid-svg-icons";
 export default function Layout({ children }) {
   const currentYear = new Date().getFullYear();
@@ -42,6 +44,14 @@ export default function Layout({ children }) {
             <Link href="/field-visits/live" className="hover:underline">
               <FontAwesomeIcon icon={faSatelliteDish} className="me-1" />
               Live
+            </Link>
+            <Link href="/field-visits/api" className="hover:underline">
+              <FontAwesomeIcon icon={faPuzzlePiece} className="me-1" />
+              API (Local)
+            </Link>
+            <Link href="/agro-prod" className="hover:underline">
+              <FontAwesomeIcon icon={faMoneyBillWheat} className="me-1" />
+              Agro Prod (API ext)
             </Link>
           </div>
         </div>
