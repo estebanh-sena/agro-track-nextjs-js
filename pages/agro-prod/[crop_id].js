@@ -1,5 +1,5 @@
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { getDataProd, getDataProdById } from "../api/production";
 
 export async function getStaticPaths() {

@@ -57,7 +57,7 @@ export default function Layout({ children }) {
         </div>
       </nav>
 
-      <main className="flex-1 max-w-4xl mx-auto p-6">{children}</main>
+      <main className="flex-1 max-w-6xl mx-auto p-6">{children}</main>
 
       <footer className="bg-green-700 text-white py-2 text-center">
         <small>

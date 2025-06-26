@@ -31,6 +31,23 @@ export default function VisitDetail({ visit }) {
 
   if (!visit) return <p>Loading...</p>;
 
+  const handleDelete = async () => {
+    if (!confirm("Are you sure you want to delete this visit?")) return;
+
+    const response = await fetch(`/api/visits/${visit.id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      router.push("/field-visits");
+    } else {
+      alert("Failed to delete the visit.");
+    }
+  };
+
+  const handleEdit = () => {
+    router.push(`/field-visits/${visit.id}/edit`);
+  };
+
   return (
     <>
       <Head>
@@ -43,7 +60,12 @@ export default function VisitDetail({ visit }) {
       <main className="p-8">
         <h1 className="font-semibold text-xl mb-4">Visit #{id}</h1>
         <ul>
-          <VisitCard visit={visit} ShowLink={false} />
+          <VisitCard
+            visit={visit}
+            ShowLink={false}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+          />
         </ul>
       </main>
     </>
