@@ -40,6 +40,7 @@ export default function handler(req, res) {
     const { title, date, description } = req.body;
     const newVisit = {
       id: visits.length + 1,
+      // id: visits.length,
       title,
       date,
       description,

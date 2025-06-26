@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-function VisitCard({ visit, ShowLink = true, onDelete, onEdit }) {
+function VisitCard({ visit, ShowLink = true, onDelete, onEdit, modificar }) {
   const title = visit.title || "Visita al campo";
   return (
     <li className="border p-4 rounded shadow">
@@ -33,6 +33,13 @@ function VisitCard({ visit, ShowLink = true, onDelete, onEdit }) {
               Delete
             </button>
           )}
+
+          <button
+            onClick={modificar}
+            className="bg-green-600 text-white px-3 py-1 rounded"
+          >
+            modificar
+          </button>
         </div>
       )}
     </li>

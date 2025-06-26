@@ -2,9 +2,16 @@ import { getAllVisits } from "@/lib/visits";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import VisitCard from "@/components/VisitCard";
+import { useEffect, useState } from "react";
+import { notFound } from "next/navigation";
+
+const URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
 export async function getStaticPaths() {
-  const visits = await getAllVisits();
+  const response = await fetch(URL + "/api/visits");
+  const visits = await response.json();
+
+  // const visits = await getAllVisits();
   const paths = visits.map((visit) => ({
     params: { id: visit.id.toString() },
   }));
@@ -16,8 +23,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const visits = await getAllVisits();
-  const visit = visits.find((v) => v.id.toString() === params.id);
+  const res = await fetch(`${URL}/api/visits/${params.id}`);
+  if (!res.ok) {
+    notFound: true;
+  }
+  const visit = await res.json();
   return {
     props: {
       visit,
@@ -26,6 +36,16 @@ export async function getStaticProps({ params }) {
 }
 
 export default function VisitDetail({ visit }) {
+  const [visits, setVisits] = useState([]); //hooks
+
+  useEffect(() => {
+    // Fetch visits data from the API
+    fetch("/api/visits")
+      .then((response) => response.json())
+      .then((data) => setVisits(data))
+      .catch((error) => console.error("Error fetching visits:", error));
+  }, []);
+
   const router = useRouter();
   const { id } = router.query;
 
@@ -48,6 +68,10 @@ export default function VisitDetail({ visit }) {
     router.push(`/field-visits/${visit.id}/edit`);
   };
 
+  function funcionModificar() {
+    console.log("Modificar visita desde el boton");
+  }
+
   return (
     <>
       <Head>
@@ -65,6 +89,7 @@ export default function VisitDetail({ visit }) {
             ShowLink={false}
             onDelete={handleDelete}
             onEdit={handleEdit}
+            modificar={funcionModificar}
           />
         </ul>
       </main>

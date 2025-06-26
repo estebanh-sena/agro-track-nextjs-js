@@ -10,7 +10,12 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 export default function NewVisit() {
-  const [form, setForm] = useState({ title: "", date: "", description: "" });
+  const [form, setForm] = useState({
+    title: "",
+    date: "",
+    description: "",
+  });
+
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -45,7 +50,7 @@ export default function NewVisit() {
             type="text"
             name="title"
             placeholder="Visit title"
-            value={form.title}
+            value={form.title} //bind the title input to form state
             onChange={handleChange}
             className="w-full border p-2"
             required
